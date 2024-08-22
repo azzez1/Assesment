@@ -4,6 +4,8 @@ Node: 16.20.2
 Package Manager: npm 8.19.4
 OS: win32 x64
 
+Branch Information - Use branch Ashish_dev for running the project on your local.
+
 Development server
 Run ng serve for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
 
