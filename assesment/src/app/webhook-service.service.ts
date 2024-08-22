@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { fromEvent, of, Subject} from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { ReturnStatement } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,6 @@ export class WebhookServiceService {
     // Listen to online event and send all queued requests
     fromEvent(window, 'online').subscribe(() => this.onConnectionRestored());
     fromEvent(window, 'offline').subscribe(() => this.onOffline());
-
   }
 
   sendRequest(data: any) {
@@ -30,31 +30,17 @@ export class WebhookServiceService {
         },
         error: (err) => {
             if (!navigator.onLine) {
-                // Only queue the request and increment the count if the user is offline
                 this.queue.push(data);
                 this.offlineHitsCount++;
                 console.log("User is offline, incrementing offlineHitsCount:", this.offlineHitsCount);
                 this.offlineHitsCountUpdated.next(this.offlineHitsCount);
             } else {
                 console.error('Request failed due to:', err.message);
-                // Handle other errors (e.g., CORS, server errors) as needed
             }
         }
     });
   }
-
-  private sendHttpRequest(data: any) {
-    this.http.post(this.url, data).subscribe({
-      error: () => {
-        // If request fails, queue it
-        this.queue.push(data);
-        this.offlineHitsCount++;
-        console.log("Failed request, incrementing offlineHitsCount:", this.offlineHitsCount); // Debugging
-        this.offlineHitsCountUpdated.next(this.offlineHitsCount);
-      }
-    });
-  }
-
+  
 
   private sendQueuedRequests() {
     while (this.queue.length > 0) {

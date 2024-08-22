@@ -11,12 +11,12 @@ export class AppComponent implements OnInit, OnDestroy {
   title = 'assesment';
   offlineHitsCount: number = 0;
   offline:boolean=false;
+  online:boolean = false;
   private offlineHitsCountSubscription: Subscription | undefined;
 
   constructor(private requestHandler: WebhookServiceService) {}
 
   ngOnInit() {
-    // Subscribe to the offline hit count changes
     this.offlineHitsCountSubscription = this.requestHandler.offlineHitsCountUpdated
       .subscribe(count => {
         this.offline = true;
