@@ -11,7 +11,6 @@ export class AppComponent implements OnInit, OnDestroy {
   title = 'assesment';
   offlineHitsCount: number = 0;
   offline:boolean=false;
-  online:boolean = false;
   private offlineHitsCountSubscription: Subscription | undefined;
 
   constructor(private requestHandler: WebhookServiceService) {}
@@ -32,7 +31,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // Unsubscribe to avoid memory leaks
     if (this.offlineHitsCountSubscription) {
       this.offlineHitsCountSubscription.unsubscribe();
     }  

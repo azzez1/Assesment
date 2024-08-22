@@ -1,9 +1,7 @@
    
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { fromEvent, of, Subject} from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { ReturnStatement } from '@angular/compiler';
+import { HttpClient } from '@angular/common/http';
+import { fromEvent, Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +15,6 @@ export class WebhookServiceService {
 
 
   constructor(private http: HttpClient) {
-    // Listen to online event and send all queued requests
     fromEvent(window, 'online').subscribe(() => this.onConnectionRestored());
     fromEvent(window, 'offline').subscribe(() => this.onOffline());
   }
@@ -51,14 +48,13 @@ export class WebhookServiceService {
 
   private onConnectionRestored() {
     this.sendQueuedRequests();
-    this.offlineHitsCount = 0;  // Reset the offline hit count
-    this.offlineHitsCountUpdated.next(this.offlineHitsCount);  // Notify subscribers
+    this.offlineHitsCount = 0;  
+    this.offlineHitsCountUpdated.next(this.offlineHitsCount);  
   }
 
   private onOffline() {
     console.log('The application is offline.');
     this.offlineHitsCountUpdated.next(this.offlineHitsCount); 
-    // Optionally, you can handle any additional offline logic here.
   }
 
   getOfflineHitsCount() {
