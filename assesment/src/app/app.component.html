@@ -1,0 +1,9 @@
+<div >
+<button class="button" (click)="hitEndpoint()">Hit Me</button>
+</div>
+<br>
+<div *ngIf="offline" >
+You are offline now!
+<br>
+No times you have hit the api while being offline is - {{this.offlineHitsCount}}
+</div>
