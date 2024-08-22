@@ -2,6 +2,10 @@
 <button class="button" (click)="hitEndpoint()">Hit Me</button>
 </div>
 <br>
+<div *ngIf="online" >
+ You are online!
+</div>
+
 <div *ngIf="offline" >
 You are offline now!
 <br>

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { WebhookServiceService } from './webhook-service.service';
-import { Subscription } from 'rxjs';
+import { fromEvent, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -11,11 +11,13 @@ export class AppComponent implements OnInit, OnDestroy {
   title = 'assesment';
   offlineHitsCount: number = 0;
   offline:boolean=false;
+  online:boolean=false;
   private offlineHitsCountSubscription: Subscription | undefined;
 
   constructor(private requestHandler: WebhookServiceService) {}
 
   ngOnInit() {
+    fromEvent(window, 'online').subscribe(() => { this.online = true; this.offline = false;});
     this.offlineHitsCountSubscription = this.requestHandler.offlineHitsCountUpdated
       .subscribe(count => {
         this.offline = true;
