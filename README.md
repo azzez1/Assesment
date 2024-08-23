@@ -1,23 +1,10 @@
-Markdown
 # My Angular Project
-
-This is an assesment task given to me
 
 ## Getting Started
 
 Branch - ashish_dev
-Make sure the 
 
 ### Angular CLI Info :-
-
-    _                      _                 ____ _     ___
-    / \   _ __   __ _ _   _| | __ _ _ __     / ___| |   |_ _|
-   / △ \ | '_ \ / _` | | | | |/ _` | '__|   | |   | |    | |
-  / ___ \| | | | (_| | |_| | | (_| | |      | |___| |___ | |
- /_/   \_\_| |_|\__, |\__,_|_|\__,_|_|       \____|_____|___|
-                |___/
-    
-
 Angular CLI: 16.2.14
 =======
 Angular Assesment - 
